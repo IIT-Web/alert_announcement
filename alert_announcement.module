@@ -5,3 +5,76 @@
 * Main file for the Alert Announcement module.
 */
 
+/**
+ * Implements hook_permission().
+ */
+function alert_announcement_permission() {
+  return array(
+    'administer alert_announcement' => array(
+      'title' => t('Administer Alert Announcement module'),
+      'description' => t('Perform administration tasks and configure Alert Announcement module.'),
+      'restrict access' => TRUE,
+    ),
+  );
+}
+
+/**
+ * Implements hook_menu().
+ */
+function alert_announcement_menu() {
+  $items['admin/config/content/alert-announcement'] = array(
+    'title' => 'Alert Announcement',
+    'description' => 'Administer, enable, or disable the Alert Announcement module.',
+    'type' => MENU_NORMAL_ITEM,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('alert_announcement_config_form'),
+    'access arguments' => array('administer alert_announcement'),
+  );
+
+  return $items;
+}
+
+/**
+ * Form constructor for the Alert Announcement admin form.
+ *
+ * @see system_settings_form()
+ *
+ * @ingroup forms
+ */
+function alert_announcement_config_form($form, &$form_state) {
+  $form = array();
+
+  $form['description'] = array(
+    '#markup' => t('<h3>Use this form to setup and enable an alert announcement.</h3>'),
+  );
+
+  $form['alert_announcement_active'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Check to enable the alert announcement.'),
+    '#default_value' => variable_get('alert_announcement_active', FALSE),
+  );
+
+  // Text field for alert announcement message headline
+  $form['alert_announcement_message_headline'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Alert Announcement Message Headline'),
+    '#size' => 100,
+    '#description' => t('Headline for the alert announcement message.'),
+    '#required' => TRUE,
+    '#default_value' => variable_get('alert_announcement_message_headline', 'Message Headline'),
+  );
+
+  // Load the text_format default a little differently.
+  $message_body = variable_get('alert_announcement_message_body', array('value' => 'Message Body', 'format' => NULL));
+
+  // Text area with selectable text_format for alert announcement message body
+  $form['alert_announcement_message_body'] = array(
+    '#type' => 'text_format',
+    '#title' => t('Alert Announcement Message Body'),
+    '#description' => t('Body text for the alert announcement message.'),
+    '#required' => TRUE,
+    '#default_value' => $message_body['value'],
+  );
+
+  return system_settings_form($form);
+}

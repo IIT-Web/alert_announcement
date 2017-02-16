@@ -2,3 +2,5 @@ name = Alert Announcement
 description = Provides a method to display an alert announcement sitewide with multiple levels of importance.
 
 core = 7.x
+
+configure = admin/config/content/alert-announcement

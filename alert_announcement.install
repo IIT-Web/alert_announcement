@@ -9,5 +9,7 @@
  * Implements hook_uninstall().
  */
 function alert_announcement_uninstall() {
-
+  variable_del('alert_announcement_message_headline');
+  variable_del('alert_announcement_message_body');
+  variable_del('alert_announcement_active');
 }
