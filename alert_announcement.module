@@ -61,11 +61,11 @@ function alert_announcement_config_form($form, &$form_state) {
     '#size' => 100,
     '#description' => t('Headline for the alert announcement message.'),
     '#required' => TRUE,
-    '#default_value' => variable_get('alert_announcement_message_headline', 'Message Headline'),
+    '#default_value' => variable_get('alert_announcement_message_headline', 'Default Message Headline'),
   );
 
   // Load the text_format default a little differently.
-  $message_body = variable_get('alert_announcement_message_body', array('value' => 'Message Body', 'format' => NULL));
+  $message_body = variable_get('alert_announcement_message_body', array('value' => 'Default Message Body', 'format' => NULL));
 
   // Text area with selectable text_format for alert announcement message body
   $form['alert_announcement_message_body'] = array(
@@ -74,7 +74,39 @@ function alert_announcement_config_form($form, &$form_state) {
     '#description' => t('Body text for the alert announcement message.'),
     '#required' => TRUE,
     '#default_value' => $message_body['value'],
+    '#format' => $message_body['format'],
   );
 
-  return system_settings_form($form);
+  $form = system_settings_form($form);
+  $form['#submit'][] = 'alert_announcement_config_form_submit';
+  return $form;
+}
+
+/**
+ * Form submission handler for alert_announcement_config_form().
+ *
+ * @see alert_announcement_config_form()
+ */
+function alert_announcement_config_form_submit($form, &$form_state) {
+  $message_body = variable_get('alert_announcement_message_body', array('value' => 'Default Message Body', 'format' => NULL));
+
+  variable_set('alert_announcement_markup', theme('alert_announcement_message_out', array(
+    'headline' => variable_get('alert_announcement_message_headline', 'Default Message Headline'),
+    'body' => check_markup($message_body['value'], $message_body['format']),
+  )));
+}
+
+/**
+ * Implements hook_theme().
+ */
+function alert_announcement_theme($existing, $type, $theme, $path) {
+  return array(
+    'alert_announcement_message_out' => array(
+      'template' => 'alert-announcement-message',
+      'variables' => array(
+        'headline' => NULL,
+        'body' => NULL,
+      ),
+    ),
+  );
 }
