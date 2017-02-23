@@ -22,7 +22,7 @@ function alert_announcement_permission() {
  * Implements hook_menu().
  */
 function alert_announcement_menu() {
-  $items['admin/config/content/alert-announcement'] = array(
+  $items['admin/config/administration/alert-announcement'] = array(
     'title' => 'Alert Announcement',
     'description' => 'Administer, enable, or disable the Alert Announcement module.',
     'type' => MENU_NORMAL_ITEM,

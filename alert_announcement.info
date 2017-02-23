@@ -3,4 +3,4 @@ description = Provides a method to display an alert announcement sitewide with m
 
 core = 7.x
 
-configure = admin/config/content/alert-announcement
+configure = admin/config/administration/alert-announcement
