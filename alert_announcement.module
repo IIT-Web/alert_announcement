@@ -64,7 +64,7 @@ function alert_announcement_config_form($form, &$form_state) {
     '#default_value' => variable_get('alert_announcement_message_headline', 'Default Message Headline'),
   );
 
-  // Load the text_format default a little differently.
+  // Load the text_format first to make things easier.
   $message_body = variable_get('alert_announcement_message_body', array('value' => 'Default Message Body', 'format' => NULL));
 
   // Text area with selectable text_format for alert announcement message body
@@ -77,36 +77,5 @@ function alert_announcement_config_form($form, &$form_state) {
     '#format' => $message_body['format'],
   );
 
-  $form = system_settings_form($form);
-  $form['#submit'][] = 'alert_announcement_config_form_submit';
-  return $form;
-}
-
-/**
- * Form submission handler for alert_announcement_config_form().
- *
- * @see alert_announcement_config_form()
- */
-function alert_announcement_config_form_submit($form, &$form_state) {
-  $message_body = variable_get('alert_announcement_message_body', array('value' => 'Default Message Body', 'format' => NULL));
-
-  variable_set('alert_announcement_markup', theme('alert_announcement_message_out', array(
-    'headline' => variable_get('alert_announcement_message_headline', 'Default Message Headline'),
-    'body' => check_markup($message_body['value'], $message_body['format']),
-  )));
-}
-
-/**
- * Implements hook_theme().
- */
-function alert_announcement_theme($existing, $type, $theme, $path) {
-  return array(
-    'alert_announcement_message_out' => array(
-      'template' => 'alert-announcement-message',
-      'variables' => array(
-        'headline' => NULL,
-        'body' => NULL,
-      ),
-    ),
-  );
+  return system_settings_form($form);
 }
