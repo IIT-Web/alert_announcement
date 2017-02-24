@@ -79,3 +79,60 @@ function alert_announcement_config_form($form, &$form_state) {
 
   return system_settings_form($form);
 }
+
+/**
+ * Implements hook_block_info().
+ */
+function alert_announcement_block_info() {
+  $blocks['alert_announcement_message_block'] = array(
+    'info' => t('Alert Announcement Message Block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function alert_announcement_block_view($delta = '') {
+  $block = array();
+
+  switch ($delta) {
+    case 'alert_announcement_message_block':
+      if (user_access('access content')) {
+        $block['subject'] = NULL;
+        $block['content'] = _alert_announcement_build_block();
+      }
+      break;
+  }
+
+  return $block;
+}
+
+/**
+ * Alert Announcement build message block content function.
+ *
+ * Returns the HTML block content for the alert announcement message block.
+ *
+ * @return
+ *   A String of HTML formatted content for the block content variable.
+ */
+function _alert_announcement_build_block(){
+  $block = array();
+
+  $block = theme('alert_announcement_block');
+
+  return $block;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function alert_announcement_theme($existing, $type, $theme, $path) {
+  return array(
+    'alert_announcement_block' => array(
+      'template' => 'templates/alert-announcement-block',
+    ),
+  );
+}
