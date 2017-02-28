@@ -12,6 +12,7 @@ function alert_announcement_install() {
   variable_set('alert_announcement_message_headline', 'Default Message Headline');
   variable_set('alert_announcement_message_body', array('value' => 'Default Message Body', 'format' => NULL));
   variable_set('alert_announcement_active', FALSE);
+  variable_set('alert_announcement_message_key', '');
 }
 
 /**
@@ -21,4 +22,5 @@ function alert_announcement_uninstall() {
   variable_del('alert_announcement_message_headline');
   variable_del('alert_announcement_message_body');
   variable_del('alert_announcement_active');
+  variable_del('alert_announcement_message_key');
 }
