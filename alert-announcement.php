@@ -16,12 +16,8 @@ require_once DRUPAL_ROOT . '/includes/bootstrap.inc';
 
 drupal_bootstrap(DRUPAL_BOOTSTRAP_DATABASE);
 
-// Query the database and see if an active alert announcement exists
-$query = db_select('variable', 'v');
-$query->condition('v.name', 'alert_announcement_active', '=')
-  ->fields('v', array('value'));
-$result = $query->execute();
-$alert_is_active = unserialize($result->fetchField());
+$stmt = db_query("SELECT v.value FROM {variable} v WHERE v.name = 'alert_announcement_active'");
+$alert_is_active = unserialize($stmt->fetchField());
 
 if ($alert_is_active) {
   echo 'alert is active';
@@ -41,6 +37,13 @@ exit();
 //$array = $result->fetchAssoc();
 //print_r($array);
 //print_r(unserialize($array['value']));
+
+// Query the database and see if an active alert announcement exists
+// $query = db_select('variable', 'v');
+// $query->condition('v.name', 'alert_announcement_active', '=')
+//   ->fields('v', array('value'));
+// $result = $query->execute();
+// $alert_is_active = unserialize($result->fetchField());
 
 
 
