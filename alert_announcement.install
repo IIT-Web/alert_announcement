@@ -13,6 +13,8 @@ function alert_announcement_install() {
   variable_set('alert_announcement_message_body', array('value' => 'Default Message Body', 'format' => NULL));
   variable_set('alert_announcement_active', FALSE);
   variable_set('alert_announcement_message_key', '');
+  variable_set('alert_announcement_message_subhead', '');
+  variable_set('alert_announcement_severity', 0);
 }
 
 /**
@@ -23,4 +25,6 @@ function alert_announcement_uninstall() {
   variable_del('alert_announcement_message_body');
   variable_del('alert_announcement_active');
   variable_del('alert_announcement_message_key');
+  variable_del('alert_announcement_message_subhead');
+  variable_del('alert_announcement_severity');
 }

@@ -64,6 +64,27 @@ function alert_announcement_config_form($form, &$form_state) {
     '#default_value' => variable_get('alert_announcement_message_headline', 'Default Message Headline'),
   );
 
+  // Text field for alert announcement message subhead
+  $form['alert_announcement_message_subhead'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Alert Announcement Message Subhead'),
+    '#size' => 100,
+    '#description' => t('Subhead for the alert announcement message. Typically used for a short descripton of the type of issue.'),
+    '#required' => FALSE,
+    '#default_value' => variable_get('alert_announcement_message_subhead', ''),
+  );
+
+  // Radio buttons for alert announcement severity
+  $message_severity = array(0 => t('Information'), 1 => t('Warning'), 2 => t('Danger'));
+  $form['alert_announcement_severity'] = array(
+    '#type' => 'radios',
+    '#title' => t('Alert Announcement Severity'),
+    '#description' => t('The selected option determines the styling of the alert announcement message.'),
+    '#options' => $message_severity,
+    '#default_value' => variable_get('alert_announcement_severity', 0),
+    '#required' => TRUE,
+  );
+
   // Load the text_format first to make things easier.
   $message_body = variable_get('alert_announcement_message_body', array('value' => 'Default Message Body', 'format' => NULL));
 
