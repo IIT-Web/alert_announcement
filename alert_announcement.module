@@ -145,6 +145,13 @@ function alert_announcement_block_view($delta = '') {
                   'type' => 'file',
                   'data' => $path . '/js/alert-announcement.js',
                 ),
+                array(
+                  'type' => 'setting',
+                  'data' => array('alertAnnouncement' => array(
+                    'jsonPath' => $path . '/alert-announcement.php',
+                    ),
+                  ),
+                ),
               ),
             ),
           ),
