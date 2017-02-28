@@ -130,31 +130,28 @@ function alert_announcement_block_info() {
  */
 function alert_announcement_block_view($delta = '') {
   $block = array();
+  $path = drupal_get_path('module', 'alert_announcement');
 
   switch ($delta) {
     case 'alert_announcement_message_block':
       if (user_access('access content')) {
         $block['subject'] = NULL;
-        $block['content'] = _alert_announcement_build_block();
+        $block['content'] = array(
+          'alert_announcement_block' => array(
+            '#theme' => 'alert_announcement_block',
+            '#attached' => array(
+              'js' => array(
+                array(
+                  'type' => 'file',
+                  'data' => $path . '/js/alert-announcement.js',
+                ),
+              ),
+            ),
+          ),
+        );
       }
       break;
   }
-
-  return $block;
-}
-
-/**
- * Alert Announcement build message block content function.
- *
- * Returns the HTML block content for the alert announcement message block.
- *
- * @return
- *   A String of HTML formatted content for the block content variable.
- */
-function _alert_announcement_build_block(){
-  $block = array();
-
-  $block = theme('alert_announcement_block');
 
   return $block;
 }
@@ -166,6 +163,7 @@ function alert_announcement_theme($existing, $type, $theme, $path) {
   return array(
     'alert_announcement_block' => array(
       'template' => 'templates/alert-announcement-block',
+      'variables' => array(),
     ),
   );
 }
