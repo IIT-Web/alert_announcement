@@ -20,41 +20,36 @@ $stmt = db_query("SELECT v.value FROM {variable} v WHERE v.name = 'alert_announc
 $alert_is_active = unserialize($stmt->fetchField());
 
 if ($alert_is_active) {
-  echo 'alert is active';
+  $output = array();
+  $stmt = db_query("SELECT v.value FROM {variable} v WHERE v.name = 'alert_announcement_message_key'");
+  $alert_key = unserialize($stmt->fetchField());
+  $stmt = db_query("SELECT v.value FROM {variable} v WHERE v.name = 'alert_announcement_message_headline'");
+  $alert_headline = unserialize($stmt->fetchField());
+  $stmt = db_query("SELECT v.value FROM {variable} v WHERE v.name = 'alert_announcement_message_subhead'");
+  $alert_subhead = unserialize($stmt->fetchField());
+  $stmt = db_query("SELECT v.value FROM {variable} v WHERE v.name = 'alert_announcement_severity'");
+  $alert_severity = unserialize($stmt->fetchField());
+  $stmt = db_query("SELECT v.value FROM {variable} v WHERE v.name = 'alert_announcement_message_markup'");
+  $alert_body = unserialize($stmt->fetchField());
+  $output[] = array(
+    'key' => $alert_key, 
+    'headline' => check_plain($alert_headline),
+    'subhead' => check_plain($alert_subhead),
+    'severity' => $alert_severity,
+    'body' => $alert_body,
+    );
+
+  drupal_add_http_header('Content-Type', 'application/json');
+  if (version_compare(PHP_VERSION, '5.3.0', '>=')) {
+    echo json_encode($output, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT);
+  } else {
+    include_once DRUPAL_ROOT . '/includes/json-encode.inc';
+    echo drupal_json_encode_helper($output);
+  }
+
 } else {
   drupal_add_http_header('Content-Type', 'application/json');
   echo '[]';
 }
 
 exit();
-
-
-//print_r($result);
-// foreach ($result as $record) {
-//  print_r($record);
-// }
-//print_r($result->fetchField());
-//$array = $result->fetchAssoc();
-//print_r($array);
-//print_r(unserialize($array['value']));
-
-// Query the database and see if an active alert announcement exists
-// $query = db_select('variable', 'v');
-// $query->condition('v.name', 'alert_announcement_active', '=')
-//   ->fields('v', array('value'));
-// $result = $query->execute();
-// $alert_is_active = unserialize($result->fetchField());
-
-
-
-// if (version_compare(PHP_VERSION, '5.3.0', '>=')) {
-//   $json_out = json_encode($output, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT);
-//   drupal_add_http_header('Content-Type', 'application/json');
-//   echo $json_out;
-// } else {
-//   include_once DRUPAL_ROOT . '/includes/json-encode.inc';
-//     $json_out = drupal_json_encode_helper($output);
-//     drupal_add_http_header('Content-Type', 'application/json');
-//     echo $json_out;
-// }
-

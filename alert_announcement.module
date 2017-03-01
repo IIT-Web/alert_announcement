@@ -111,6 +111,10 @@ function alert_announcement_config_form($form, &$form_state) {
 function alert_announcement_config_form_submit($form, &$form_state) {
   $message_key = drupal_random_key();
   variable_set('alert_announcement_message_key', $message_key);
+  $body = variable_get('alert_announcement_message_body')['value'];
+  $format = variable_get('alert_announcement_message_body')['format'];
+  $body_markup = check_markup($body, $format);
+  variable_set('alert_announcement_message_markup', $body_markup);
 }
 
 /**

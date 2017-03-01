@@ -48,6 +48,8 @@
 
 <div id="alert-announcement-wrapper">
   <div class="container">
-    <p>Basic Alert Announcement Block Content</p>
+    <div class="alert-subhead"></div>
+    <div class="alert-headline"></div>
+    <div class="alert-body"></div>
   </div>
 </div>

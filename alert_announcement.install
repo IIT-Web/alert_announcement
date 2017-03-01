@@ -15,6 +15,7 @@ function alert_announcement_install() {
   variable_set('alert_announcement_message_key', '');
   variable_set('alert_announcement_message_subhead', '');
   variable_set('alert_announcement_severity', 0);
+  variable_set('alert_announcement_message_markup', '');
 }
 
 /**
@@ -27,4 +28,5 @@ function alert_announcement_uninstall() {
   variable_del('alert_announcement_message_key');
   variable_del('alert_announcement_message_subhead');
   variable_del('alert_announcement_severity');
+  variable_del('alert_announcement_message_markup');
 }
