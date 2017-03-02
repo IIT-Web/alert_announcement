@@ -13,7 +13,6 @@ function alert_announcement_permission() {
     'administer alert_announcement' => array(
       'title' => t('Administer Alert Announcement module'),
       'description' => t('Perform administration tasks and configure Alert Announcement module.'),
-      'restrict access' => TRUE,
     ),
   );
 }
