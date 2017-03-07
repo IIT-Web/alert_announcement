@@ -31,12 +31,15 @@ if ($alert_is_active) {
   $alert_severity = unserialize($stmt->fetchField());
   $stmt = db_query("SELECT v.value FROM {variable} v WHERE v.name = 'alert_announcement_message_markup'");
   $alert_body = unserialize($stmt->fetchField());
+  $stmt = db_query("SELECT v.value FROM {variable} v WHERE v.name = 'alert_announcement_client_cache'");
+  $client_cache = unserialize($stmt->fetchField());
   $output[] = array(
     'key' => $alert_key, 
     'headline' => check_plain($alert_headline),
     'subhead' => check_plain($alert_subhead),
     'severity' => $alert_severity,
     'body' => $alert_body,
+    'clientCacheTime' => intval($client_cache),
     );
 
   drupal_add_http_header('Content-Type', 'application/json');
