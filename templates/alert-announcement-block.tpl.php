@@ -46,8 +46,9 @@
  */
 ?>
 
-<div id="alert-announcement-wrapper">
+<div id="alert-announcement-wrapper" style="display:none;">
   <div class="container">
+  	<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     <div class="alert-subhead"></div>
     <div class="alert-headline"></div>
     <div class="alert-body"></div>

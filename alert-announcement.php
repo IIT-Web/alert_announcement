@@ -33,6 +33,8 @@ if ($alert_is_active) {
   $alert_body = unserialize($stmt->fetchField());
   $stmt = db_query("SELECT v.value FROM {variable} v WHERE v.name = 'alert_announcement_client_cache'");
   $client_cache = unserialize($stmt->fetchField());
+  $stmt = db_query("SELECT v.value FROM {variable} v WHERE v.name = 'alert_announcement_dismissible'");
+  $dismissible = unserialize($stmt->fetchField());
   $output[] = array(
     'key' => $alert_key, 
     'headline' => check_plain($alert_headline),
@@ -40,9 +42,11 @@ if ($alert_is_active) {
     'severity' => $alert_severity,
     'body' => $alert_body,
     'clientCacheTime' => intval($client_cache),
+    'dismissible' => $dismissible,
     );
 
   drupal_add_http_header('Content-Type', 'application/json');
+  drupal_add_http_header('Cache-Control', 'public, max-age=3600');
   if (version_compare(PHP_VERSION, '5.3.0', '>=')) {
     echo json_encode($output, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT);
   } else {
@@ -52,6 +56,7 @@ if ($alert_is_active) {
 
 } else {
   drupal_add_http_header('Content-Type', 'application/json');
+  drupal_add_http_header('Cache-Control', 'public, max-age=3600');
   echo '[]';
 }
 

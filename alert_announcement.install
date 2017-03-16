@@ -17,6 +17,7 @@ function alert_announcement_install() {
   variable_set('alert_announcement_severity', 0);
   variable_set('alert_announcement_message_markup', '');
   variable_set('alert_announcement_client_cache', 0);
+  variable_set('alert_announcement_dismissible', TRUE);
 }
 
 /**
@@ -31,4 +32,5 @@ function alert_announcement_uninstall() {
   variable_del('alert_announcement_severity');
   variable_del('alert_announcement_message_markup');
   variable_del('alert_announcement_client_cache');
+  variable_del('alert_announcement_dismissible');
 }

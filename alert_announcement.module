@@ -97,6 +97,12 @@ function alert_announcement_config_form($form, &$form_state) {
     '#format' => $message_body['format'],
   );
 
+  $form['alert_announcement_dismissible'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Check to allow the user to dismiss the alert until changed.'),
+    '#default_value' => variable_get('alert_announcement_dismissible', TRUE),
+  );
+
   // Client side caching select
   $client_caching = array(0 => t('<none>'), 30 => t('30 seconds'), 60 => t('1 minute'), 300 => t('5 minutes'));
   $form['alert_announcement_client_cache'] = array(
@@ -166,6 +172,9 @@ function alert_announcement_block_view($delta = '') {
                     ),
                   ),
                 ),
+              ),
+              'css' => array(
+                $path . '/css/styles.css',
               ),
             ),
           ),
