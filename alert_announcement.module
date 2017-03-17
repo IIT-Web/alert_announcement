@@ -108,9 +108,20 @@ function alert_announcement_config_form($form, &$form_state) {
   $form['alert_announcement_client_cache'] = array(
     '#type' => 'select',
     '#title' => t('Alert Announcement Client Cache'),
-    '#description' => t('The selected option determines the amount of time a browser will cache the results.'),
+    '#description' => t('This determines the amount of time a browser will cache the results locally per session.'),
     '#options' => $client_caching,
     '#default_value' => variable_get('alert_announcement_client_cache', 0),
+    '#required' => TRUE,
+  );
+
+  // External caching select
+  $external_caching = array(0 => t('<none>'), 30 => t('30 seconds'), 60 => t('1 minute'), 300 => t('5 minutes'));
+  $form['alert_announcement_external_cache'] = array(
+    '#type' => 'select',
+    '#title' => t('Alert Announcement External Cache'),
+    '#description' => t('This determines the maximum time an external cache can use the results.'),
+    '#options' => $external_caching,
+    '#default_value' => variable_get('alert_announcement_external_cache', 0),
     '#required' => TRUE,
   );
 

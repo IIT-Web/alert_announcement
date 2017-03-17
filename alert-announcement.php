@@ -18,6 +18,13 @@ drupal_bootstrap(DRUPAL_BOOTSTRAP_DATABASE);
 
 $stmt = db_query("SELECT v.value FROM {variable} v WHERE v.name = 'alert_announcement_active'");
 $alert_is_active = unserialize($stmt->fetchField());
+$stmt = db_query("SELECT v.value FROM {variable} v WHERE v.name = 'alert_announcement_external_cache'");
+$external_cache = unserialize($stmt->fetchField());
+if (intval($external_cache) == 0) {
+  drupal_add_http_header('Cache-Control', 'no-cache, must-revalidate, post-check=0, pre-check=0');
+} else {
+  drupal_add_http_header('Cache-Control', 'public, max-age=' . intval($external_cache));
+}
 
 if ($alert_is_active) {
   $output = array();
@@ -46,7 +53,6 @@ if ($alert_is_active) {
     );
 
   drupal_add_http_header('Content-Type', 'application/json');
-  drupal_add_http_header('Cache-Control', 'public, max-age=3600');
   if (version_compare(PHP_VERSION, '5.3.0', '>=')) {
     echo json_encode($output, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT);
   } else {
@@ -56,7 +62,6 @@ if ($alert_is_active) {
 
 } else {
   drupal_add_http_header('Content-Type', 'application/json');
-  drupal_add_http_header('Cache-Control', 'public, max-age=3600');
   echo '[]';
 }
 
