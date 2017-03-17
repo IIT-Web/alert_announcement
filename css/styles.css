@@ -1,3 +1,87 @@
+#alert-announcement-wrapper {
+	padding: 20px 0;
+}
+
+#alert-announcement-wrapper .alert-body {
+	color: #111;
+}
+
+#alert-announcement-wrapper .alert-headline {
+	font-weight: bold;
+	font-size: 19px;
+	margin-bottom: 10px;
+}
+
+#alert-announcement-wrapper .alert-subhead {
+	font-weight: bold;
+	font-size: 17px;
+	color: #777;
+}
+
+#alert-announcement-wrapper.info {
+	border-bottom: 3px solid #888;
+	background-color: #d5d5d5;
+}
+
+#alert-announcement-wrapper.warning {
+	border-bottom: 3px solid orange;
+	background-color: #dc6603;
+}
+
+#alert-announcement-wrapper.warning .alert-headline {
+	color: #fff;
+	font-size: 20px;
+}
+
+#alert-announcement-wrapper.warning .alert-subhead {
+	color: #ffcb9f;
+	font-size: 18px;
+}
+
+#alert-announcement-wrapper.warning .alert-body {
+	color: #fff;
+}
+
+#alert-announcement-wrapper.warning .alert-body a {
+	color: #fff;
+	text-decoration: underline;
+}
+
+#alert-announcement-wrapper.danger {
+	background-color: #c00;
+	border-bottom: 4px solid red;
+	padding: 40px 0;
+}
+
+#alert-announcement-wrapper.danger .alert-headline {
+	color: #fff;
+	font-size: 24px;
+}
+
+#alert-announcement-wrapper.danger .alert-subhead {
+	color: #ffd5d5;
+	font-size: 18px;
+}
+
+#alert-announcement-wrapper.danger .alert-body {
+	color: #fff;
+	font-size: 15px;
+}
+
+#alert-announcement-wrapper.danger .alert-body a {
+	color: #fff;
+	text-decoration: underline;
+}
+
+#alert-announcement-wrapper.danger > .container {
+    padding-left: 65px;
+    background-image: url("danger-icon-white.png");
+    background-image: url("danger-icon-white.svg"), none;
+    background-repeat: no-repeat;
+    background-size: 40px 40px;
+    background-position: 10px 10px;
+}
+
 #alert-announcement-wrapper button.close {
 	margin: 0;
 	overflow: visible;
