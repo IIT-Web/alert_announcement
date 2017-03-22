@@ -9,7 +9,14 @@
 #alert-announcement-wrapper .alert-headline {
 	font-weight: bold;
 	font-size: 19px;
+	margin-bottom: 0;
+}
+
+#alert-announcement-wrapper .alert-updated-date {
+	color: #777;
 	margin-bottom: 10px;
+	font-size: 12px;
+	font-style: italic;
 }
 
 #alert-announcement-wrapper .alert-subhead {
@@ -33,6 +40,10 @@
 	font-size: 20px;
 }
 
+#alert-announcement-wrapper.warning .alert-updated-date {
+	color: #feb67a;
+}
+
 #alert-announcement-wrapper.warning .alert-subhead {
 	color: #ffcb9f;
 	font-size: 18px;
@@ -47,6 +58,10 @@
 	text-decoration: underline;
 }
 
+#alert-announcement-wrapper.warning .alert-body a:hover {
+	color: #111;
+}
+
 #alert-announcement-wrapper.danger {
 	background-color: #c00;
 	border-bottom: 4px solid red;
@@ -56,6 +71,10 @@
 #alert-announcement-wrapper.danger .alert-headline {
 	color: #fff;
 	font-size: 24px;
+}
+
+#alert-announcement-wrapper.danger .alert-updated-date {
+	color: #fe9090;
 }
 
 #alert-announcement-wrapper.danger .alert-subhead {
@@ -71,6 +90,10 @@
 #alert-announcement-wrapper.danger .alert-body a {
 	color: #fff;
 	text-decoration: underline;
+}
+
+#alert-announcement-wrapper.danger .alert-body a:hover {
+	color: #000;
 }
 
 #alert-announcement-wrapper.danger > .container {

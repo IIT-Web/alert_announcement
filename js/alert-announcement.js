@@ -65,6 +65,7 @@
 
       $('#alert-announcement-wrapper').attr('data-key', data[0].key);
       $('#alert-announcement-wrapper .alert-headline').html(data[0].headline);
+      $('#alert-announcement-wrapper .alert-updated-date').html('Updated: ' + data[0].updated);
       $('#alert-announcement-wrapper .alert-subhead').html(data[0].subhead);
       $('#alert-announcement-wrapper .alert-body').html(data[0].body);
 

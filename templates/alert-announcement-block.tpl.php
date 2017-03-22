@@ -51,6 +51,7 @@
   	<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     <div class="alert-subhead"></div>
     <div class="alert-headline"></div>
+    <div class="alert-updated-date"></div>
     <div class="alert-body"></div>
   </div>
 </div>

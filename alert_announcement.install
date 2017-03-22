@@ -19,6 +19,7 @@ function alert_announcement_install() {
   variable_set('alert_announcement_client_cache', 0);
   variable_set('alert_announcement_dismissible', TRUE);
   variable_set('alert_announcement_external_cache', 0);
+  variable_set('alert_announcement_updated_date', '');
 }
 
 /**
@@ -35,4 +36,5 @@ function alert_announcement_uninstall() {
   variable_del('alert_announcement_client_cache');
   variable_del('alert_announcement_dismissible');
   variable_del('alert_announcement_external_cache');
+  variable_del('alert_announcement_updated_date');
 }

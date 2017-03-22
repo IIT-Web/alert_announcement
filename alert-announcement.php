@@ -42,6 +42,8 @@ if ($alert_is_active) {
   $client_cache = unserialize($stmt->fetchField());
   $stmt = db_query("SELECT v.value FROM {variable} v WHERE v.name = 'alert_announcement_dismissible'");
   $dismissible = unserialize($stmt->fetchField());
+  $stmt = db_query("SELECT v.value FROM {variable} v WHERE v.name = 'alert_announcement_updated_date'");
+  $updated = unserialize($stmt->fetchField());
   $output[] = array(
     'key' => $alert_key, 
     'headline' => check_plain($alert_headline),
@@ -50,6 +52,7 @@ if ($alert_is_active) {
     'body' => $alert_body,
     'clientCacheTime' => intval($client_cache),
     'dismissible' => $dismissible,
+    'updated' => $updated,
     );
 
   drupal_add_http_header('Content-Type', 'application/json');
