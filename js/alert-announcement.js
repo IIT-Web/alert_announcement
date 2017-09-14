@@ -12,20 +12,20 @@
     attach: function (context, settings) {
       //console.log('alert-announcement.js loaded with behavior: ' + settings.alertAnnouncement.jsonPath);
       if($('#alert-announcement-wrapper', context).length > 0) {
-      	console.log('wrapper exists in context');
+        //console.log('wrapper exists in context');
 
         if (sessionStorage.alertAnnouncement && sessionStorage.alertAnnouncementCacheExpires) {
-          console.log('var exists in session storage');
+          //console.log('var exists in session storage');
           var expires = new Date(Number(sessionStorage.alertAnnouncementCacheExpires));
           if (new Date() > expires) {
-            console.log('client cache expired');
+            //console.log('client cache expired');
             callJSON(settings);
           } else {
-            console.log('client cache good');
+            //console.log('client cache good');
             buildAlertMessage(JSON.parse(sessionStorage.alertAnnouncement));
           }
         } else {
-          console.log('expires var does not exist');
+          //console.log('expires var does not exist');
           callJSON(settings);
         }
         
@@ -87,7 +87,11 @@
     var now = new Date();
     var cacheExpires = Number(sessionStorage.alertAnnouncementCacheExpires);
     if (cacheExpires < now.getTime() || isNaN(cacheExpires)) {
-      sessionStorage.alertAnnouncementCacheExpires = now.getTime() + 1000 * data[0].clientCacheTime;
+      if (data[0] && data[0].clientCacheTime) {
+        sessionStorage.alertAnnouncementCacheExpires = now.getTime() + 1000 * data[0].clientCacheTime;
+      } else {
+        sessionStorage.alertAnnouncementCacheExpires = now.getTime() + 1000 * 0;
+      }
     }
   }
 
